@@ -59,7 +59,11 @@ class _ExpensesState extends State<Expenses> {
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
       isScrollControlled: true,
+      useSafeArea: true,
       context: context,
+      constraints: BoxConstraints(
+        maxWidth: MediaQuery.of(context).size.width,
+      ),
       builder: (ctx) => NewExpense(addExpenses: addExpense),
     );
   }
@@ -91,7 +95,9 @@ class _ExpensesState extends State<Expenses> {
       body: widgetWidth < 600
           ? Column(
               children: [
-                Chart(expenses: _registeredExpenses),
+                Expanded(
+                  child: Chart(expenses: _registeredExpenses),
+                ),
                 Expanded(
                   child: mainContent,
                 ),
